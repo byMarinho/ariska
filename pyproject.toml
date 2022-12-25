@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "ariska"
+version = "0.1.0"
+description = "Downlaod mp3 by youtube"
+authors = ["majurr <marionascimentojunior@hotmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+streamlit = "^1.15.2"
+pytube = "^12.1.2"
+
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^6.0.0"
+autopep8 = "^2.0.1"
+mypy = "^0.991"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
