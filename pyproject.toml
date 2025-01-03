@@ -1,22 +1,19 @@
-[tool.poetry]
+[project]
 name = "ariska"
-version = "0.1.0"
-description = "Downlaod mp3 by youtube"
-authors = ["majurr <marionascimentojunior@hotmail.com>"]
-license = "MIT"
+version = "0.2.0"
+description = "Download Midias Youtube"
+authors = [
+    {name = "byMario", email = "marionascimentotj@gmail.com"},
+]
+dependencies = ["fastapi[standard]>=0.115.6", "pydantic>=2.10.4", "pytubefix>=8.8.2", "scalar-fastapi>=1.0.3", "streamlit>=1.41.1", "requests>=2.32.3", "fastapi-limiter>=0.1.6", "redis>=5.3.0b4", "python-dotenv>=1.0.1"]
+requires-python = ">=3.11"
 readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "^3.10"
-streamlit = "^1.15.2"
-pytube = "^12.1.2"
-
-
-[tool.poetry.group.dev.dependencies]
-flake8 = "^6.0.0"
-autopep8 = "^2.0.1"
-mypy = "^0.991"
+license = {text = "MIT"}
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true

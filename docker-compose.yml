@@ -1,8 +1,67 @@
 services:
-
-  app:
-    build: .
+  redis:
+    image: redis:latest
+    hostname: redis
+    container_name: ariska-redis
+    command: redis-server --requirepass REdis2025!
     ports:
-      - 8501:8501
+      - "6379:6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=no
+      - REDIS_PASSWORD=${REDIS_PASS}
     volumes:
-      - ./:/app
+      - redis-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: [ 'CMD', 'redis-cli', '-a', REDIS_PASSWORD, 'ping' ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - ariskanet
+
+  fastapi:
+    build:
+      context: .
+      dockerfile: .build/api/Dockerfile
+    container_name: ariska-api
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+      - ./src/tmp:/app/src/tmp
+    networks:
+      - ariskanet
+
+  streamlit:
+    build:
+      context: .
+      dockerfile: .build/app/Dockerfile
+    container_name: ariska-app
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./src:/app/src
+      - ./src/tmp:/app/src/tmp
+    depends_on:
+      - fastapi
+    networks:
+      - ariskanet
+
+volumes:
+  redis-data:
+  tmp:
+    driver_opts:
+      type: none
+      device: ${PWD}/src/tmp
+      o: bind
+
+networks:
+  ariskanet:
+    driver: bridge
