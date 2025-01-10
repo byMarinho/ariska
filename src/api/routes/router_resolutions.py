@@ -13,8 +13,11 @@ router = APIRouter()
     dependencies=[Depends(RateLimiter(times=6, seconds=60))],
 )
 async def resolutions(url: str):
-    """Summary:
-        Retorna as resoluções disponíveis para áudio e vídeo da URL informada
+    """
+    # Summary:
+        Retorna as resoluções disponíveis para áudio e vídeo da URL informada.
+        Taxa Limite de Consumo: 6 solicitações por minuto.
+
     # Params:
         url (str): URL do vídeo do youtube
 

@@ -19,7 +19,10 @@ router = APIRouter()
 async def download_playlist_audio(
     url: str, list: str, resolution: str, zip: bool = True
 ):
-    """Summary: Baixa todos os áudios de uma playlist do Youtube na resolução especificada
+    """
+    # Summary:
+        Baixa todos os áudios de uma playlist do Youtube na resolução especificada.
+        Taxa Limite de Consumo: 1 solicitação a cada 2 minutos.
 
     # Params:
         url (str): URL da playlist do Youtube
@@ -51,7 +54,10 @@ async def download_playlist_audio(
 async def download_playlist_video(
     url: str, list: str, resolution: str, zip: bool = True
 ):
-    """Summary: Baixa todos os vídeos da playlist do Youtube na resolução especificada
+    """
+    # Summary:
+        Baixa todos os vídeos da playlist do Youtube na resolução especificada.
+        Taxa Limite de Consumo: 1 solicitação a cada 2 minutos.
 
     # Params:
         url (str): URL da playlist do Youtube

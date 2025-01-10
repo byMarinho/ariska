@@ -13,8 +13,10 @@ router = APIRouter()
     dependencies=[Depends(RateLimiter(times=6, seconds=60))],
 )
 async def download_audio(url: str, resolution: str):
-    """Summary:
-        Baixar apenas o áudio do vídeo do Youtube na resolução especificada
+    """
+    # Summary:
+        Baixar apenas o áudio do vídeo do Youtube na resolução especificada.
+        Taxa Limite de Consumo: 6 solicitações por minuto.
 
     # Params:
         url (str): URL do vídeo no Youtube
@@ -35,7 +37,11 @@ async def download_audio(url: str, resolution: str):
     dependencies=[Depends(RateLimiter(times=6, seconds=60))],
 )
 async def download_video(url: str, resolution: str):
-    """Summary: Baixa o vídeo completo do Youtube na resolução especificada
+    """
+    # Summary:
+        Baixa o vídeo completo do Youtube na resolução especificada.
+        Taxa Limite de Consumo: 6 solicitações por minuto.
+
 
     # Params:
         url (str): URL do vídeo no Youtube

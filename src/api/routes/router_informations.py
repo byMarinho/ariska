@@ -10,11 +10,13 @@ router = APIRouter()
     "/informations",
     tags=["Informations"],
     summary="Obter as informações do vídeo",
-    dependencies=[Depends(RateLimiter(times=2, seconds=5))],
+    dependencies=[Depends(RateLimiter(times=15, seconds=60))],
 )
 async def informations(url: str):
-    """Summary:
-        Retorna informações do vídeo da URL
+    """
+    # Summary:
+        Retorna informações do vídeo da URL.
+        Taxa Limite de Consumo: 15 solicitações por minuto
 
     # Params:
         url (str): URL do vídeo do Youtube
