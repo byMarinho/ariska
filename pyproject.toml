@@ -5,7 +5,7 @@ description = "Download Midias Youtube"
 authors = [
     {name = "byMario", email = "marionascimentotj@gmail.com"},
 ]
-dependencies = ["fastapi[standard]>=0.115.6", "pydantic>=2.10.4", "pytubefix>=8.8.2", "scalar-fastapi>=1.0.3", "streamlit>=1.41.1", "requests>=2.32.3", "fastapi-limiter>=0.1.6", "redis>=5.3.0b4", "python-dotenv>=1.0.1"]
+dependencies = ["fastapi[standard]>=0.115.6", "pydantic>=2.10.4", "pytubefix>=8.8.2", "scalar-fastapi>=1.0.3", "streamlit>=1.41.1", "requests>=2.32.3", "fastapi-limiter>=0.1.6", "redis>=5.3.0b4", "python-dotenv>=1.0.1", "watchdog>=6.0.0"]
 requires-python = ">=3.11"
 readme = "README.md"
 license = {text = "MIT"}

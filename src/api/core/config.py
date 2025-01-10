@@ -18,6 +18,9 @@ ARISKA_API_PRD = os.getenv("ARISKA_API_PRD", "http://localhost:8000")
 
 ARISKA_API = ARISKA_API_DEV if API_ENV == "development" else ARISKA_API_PRD
 
-DOWNLOAD_PATH = os.getenv("DOWNLOAD_PATH", "/tmp")
+API_RUN = os.getenv("API_RUN", "local")
+DOWNLOAD_SERVER = os.getenv("DOWNLOAD_PATH", "/tmp")
+DOWNLOAD_LOCAL = os.getenv("DOWNLOAD_LOCAL", "/tmp")
+DOWNLOAD_PATH = DOWNLOAD_LOCAL if API_RUN == "local" else DOWNLOAD_SERVER
 
 os.makedirs(DOWNLOAD_PATH, exist_ok=True)

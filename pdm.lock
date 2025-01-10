@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:cb8382624c26b99718dd61bb8156d7a6e89b4350f80ce3ef852d28563ebc52e3"
+content_hash = "sha256:b3025dc5378e445fe2a25a979b2f8d65cee4eae8287e368d329f435ef498a84f"
 
 [[metadata.targets]]
 requires_python = ">=3.11"
@@ -1377,7 +1377,6 @@ version = "6.0.0"
 requires_python = ">=3.9"
 summary = "Filesystem events monitoring"
 groups = ["default"]
-marker = "platform_system != \"Darwin\""
 files = [
     {file = "watchdog-6.0.0-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:6eb11feb5a0d452ee41f824e271ca311a09e250441c262ca2fd7ebcf2461a06c"},
     {file = "watchdog-6.0.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:ef810fbf7b781a5a593894e4f439773830bdecb885e6880d957d5b9382a960d2"},

@@ -1,10 +1,28 @@
+import time
+
 import requests
 import streamlit as st
+from requests.exceptions import RequestException
 
 from api.core import config
 from api.services.utility import FileMedia
 
 API = config.ARISKA_API
+
+
+def try_connect_api(max_retries=5, delay=2):
+    for attemp in range(max_retries):
+        try:
+            response = requests.get(API + "/")
+            if response.status_code == 200:
+                return True
+        except RequestException:
+            if attemp < max_retries - 1:
+                st.toast(f"Tentando conectar à API ({attemp + 1}/{max_retries})")
+                time.sleep(delay)
+            continue
+    return False
+
 
 st.set_page_config(
     page_title="Ariska",
@@ -74,19 +92,30 @@ if url:
 
     col3, col4 = st.columns([1, 3], vertical_alignment="bottom", gap="small")
     if typeMedia == "Áudio" or typeMedia == "Vídeo":
-        resp = requests.get(API + "/resolutions?url=" + url)
-        res = resp.json()
-
-        if resp.status_code == 200:
-            resolutions = (
-                sorted(res["audio_resolutions"])
-                if typeMedia == "Áudio"
-                else sorted(res["video_resolutions"])
+        # verifica se a API está disponível
+        if not try_connect_api():
+            st.toast(
+                "Ops... Não foi possível conectar à API. Por favor, tente novamente mais tarde"
             )
-            resolution = col3.selectbox("Escolha a Resolução", (resolutions))
-        else:
+            st.stop()
+        try:
+            resp = requests.get(f"{API}/resolutions?url={url}")
+            if resp.status_code != 200:
+                st.toast(
+                    "Falha ao obter resoluções do vídeo", icon=":material/warning:"
+                )
+
+            res = resp.json()
+            if resp.status_code == 200:
+                resolutions = (
+                    sorted(res["audio_resolutions"])
+                    if typeMedia == "Áudio"
+                    else sorted(res["video_resolutions"])
+                )
+                resolution = col3.selectbox("Escolha a Resolução", (resolutions))
+        except Exception as err:
             # TODO: Tratar melhor a mensagem de erro
-            st.error("Error...", "Falha ao Obter Resoluções do Vídeo")
+            st.toast(f"Error ao Processar Requisição: {err}", icon=":material/error:")
 
         if col4.button("Download"):
             with st.spinner("É rapidinho, já estamos trabalhando..."):
