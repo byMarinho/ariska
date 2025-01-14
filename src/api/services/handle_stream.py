@@ -9,7 +9,7 @@ def get_informations(url: str):
         url (str): link do vídeo do youtube
     """
     try:
-        yt = YouTube(url)
+        yt = YouTube(url, use_po_token=True)
 
         return {
             "title": yt.title,
@@ -32,7 +32,7 @@ def get_resolutions(url: str):
         url (str): link do vídeo do youtube
     """
     try:
-        yt = YouTube(url)
+        yt = YouTube(url, use_po_token=True)
         sVideo = [
             stream.resolution
             for stream in yt.streams.filter(progressive=True, file_extension="mp4")

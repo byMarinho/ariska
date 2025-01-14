@@ -36,7 +36,7 @@ def make_download_playlist_mp3(url: str, list: str, resolution: str):
     """
     try:
         audioPaths = []
-        pl = Playlist(f"{url}&list={list}")
+        pl = Playlist(f"{url}&list={list}", use_po_token=True)
         print(f"Baixando playlist: {pl.title}")
 
         for video in pl.videos:
@@ -79,7 +79,7 @@ def make_download_playlist_mp4(url: str, list: str, resolution: str):
     """
     try:
         videoPaths = []
-        pl = Playlist(f"{url}&list={list}")
+        pl = Playlist(f"{url}&list={list}", use_po_token=True)
         print(f"Baixando playlist: {pl.title}")
 
         for video in pl.videos:

@@ -23,7 +23,7 @@ def make_download_mp3(url: str, resolution: str, filename: str = None):
             file (file): arquivo de música mp3
     """
     try:
-        yt = YouTube(url)
+        yt = YouTube(url, use_po_token=True)
         audioStream = yt.streams.filter(only_audio=True, abr=resolution).first()
 
         filename = yt.title if filename is None else filename
@@ -62,7 +62,7 @@ def make_download_mp4(url: str, resolution: str, filename: str = None):
             file (file): arquivo de vídeo mp4
     """
     try:
-        yt = YouTube(url)
+        yt = YouTube(url, use_po_token=True)
         videoStream = yt.streams.filter(
             progressive=True, file_extension="mp4", resolution=resolution
         ).first()
