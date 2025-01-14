@@ -58,6 +58,7 @@ services:
       - ./.build/nginx/ssl:/etc/nginx/ssl
       - ./.build/nginx/certbot:/var/www/certbot
     depends_on:
+      - certbot
       - fastapi
     networks:
       - ariskanet
@@ -97,6 +98,7 @@ services:
       - ./.build/nginx/ssl:/etc/nginx/ssl
       - ./.build/nginx/certbot:/var/www/certbot
     depends_on:
+      - certbot
       - streamlit
     networks:
       - ariskanet
