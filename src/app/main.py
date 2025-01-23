@@ -98,24 +98,37 @@ if url:
                 "Ops... Não foi possível conectar à API. Por favor, tente novamente mais tarde"
             )
             st.stop()
-        try:
-            resp = requests.get(f"{API}/resolutions?url={url}")
-            if resp.status_code != 200:
-                st.toast(
-                    "Falha ao obter resoluções do vídeo", icon=":material/warning:"
-                )
 
+        try:
+            resp = requests.get(f"{API}/resolutions?url={url}", timeout=10)
+            resp.raise_for_status()
             res = resp.json()
-            if resp.status_code == 200:
-                resolutions = (
-                    sorted(res["audio_resolutions"])
-                    if typeMedia == "Áudio"
-                    else sorted(res["video_resolutions"])
+
+            if "audio_resolutions" not in res or "video_resolutions" not in res:
+                st.toast(
+                    "Nenhuma resolução encontrada para este vídeo",
+                    icon=":material/warning:",
                 )
-                resolution = col3.selectbox("Escolha a Resolução", (resolutions))
-        except Exception as err:
+                st.stop()
+
+            resolutions = (
+                sorted(res.get("audio_resolutions", []))
+                if typeMedia == "Áudio"
+                else sorted(res.get("video_resolutions", []))
+            )
+
+            if not resolutions:
+                st.toast("Nenhuma resolução disponível.", icon=":material/warning:")
+                st.stop()
+
+            resolution = col3.selectbox("Escolha a Resolução", (resolutions))
+        except requests.exceptions.RequestException as err:
             # TODO: Tratar melhor a mensagem de erro
-            st.toast(f"Error ao Processar Requisição: {err}", icon=":material/error:")
+            st.toast(f"Error ao se comunicar com a API: {err}", icon=":material/error:")
+            st.stop()
+        except ValueError:
+            st.toast("Erro ao processar a resposta da API", icon=":material/error:")
+            st.stop()
 
         if col4.button("Download"):
             with st.spinner("É rapidinho, já estamos trabalhando..."):
