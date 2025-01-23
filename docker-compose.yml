@@ -82,7 +82,7 @@ services:
       - ./src:/app/src
       - ./src/tmp:/app/src/tmp
     depends_on:
-      - nginx-api
+      - fastapi
     networks:
       - ariskanet
 
