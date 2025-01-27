@@ -914,13 +914,13 @@ files = [
 
 [[package]]
 name = "pytubefix"
-version = "8.8.2"
+version = "8.12.0"
 requires_python = ">=3.7"
 summary = "Python3 library for downloading YouTube Videos."
 groups = ["default"]
 files = [
-    {file = "pytubefix-8.8.2-py3-none-any.whl", hash = "sha256:a2e75def3d72004558829505a4f632915fa781834943d491bfe315d4fbc7c558"},
-    {file = "pytubefix-8.8.2.tar.gz", hash = "sha256:918d38b58024bdad34b0d2c12e35d37962764250ab37c7c126f1cc27db3b2225"},
+    {file = "pytubefix-8.12.0-py3-none-any.whl", hash = "sha256:560b0f17b5a5b86fa9a542b02049eaa06492f2f6f66b787244333673387343eb"},
+    {file = "pytubefix-8.12.0.tar.gz", hash = "sha256:8a2b51a06efbec926ad88d2d686b6a66c7da37edf406eab7347d4ee43b638a4b"},
 ]
 
 [[package]]

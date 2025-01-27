@@ -17,7 +17,7 @@ RUN pdm install --no-lock --no-editable
 # Run stage
 FROM python:${PYTHON_BASE}
 
-RUN apt update -y && apt install ffmpeg -y
+RUN apt update -y && apt install ffmpeg -y && apt install nodejs -y
 RUN mkdir -p src/tmp && chmod 777 src/tmp
 
 WORKDIR /app
