@@ -66,6 +66,7 @@ app = FastAPI(
 
         Desenvolvida em FastAPI 🚀 com ❤️ byMario.dev
 
+        * siteÇ    https://bymario.dev
         * github:  https://github.com/byMarinho/ariska
         * e-mail:  me@bymario.dev
         * license: MIT

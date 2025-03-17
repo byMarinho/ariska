@@ -69,7 +69,7 @@ footer_html = """
 
     <div class="footer">
         <p><a href="http://localhost:8000/" target="_blank">API Integração</a> - <a href="mailto:me@bymario.dev" target="_blank">Contato</a> - <a href="https://github.com/byMarinho/ariska" target="_blank">Projeto Github</a></p>
-        <p>Copyright 2024 | Desenvolvido com ❤️ <a href="https://github.com/byMarinho" target="_blank">byMario.dev</a></p>
+        <p>Copyright 2024 | Desenvolvido com ❤️ <a href="https://bymario.dev" target="_blank">byMario.dev</a></p>
     </div>    
 """
 

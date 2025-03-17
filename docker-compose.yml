@@ -20,16 +20,6 @@ services:
     networks:
       - ariskanet
 
-  # certbot:
-  #   image: certbot/certbot:latest
-  #   container_name: ariska-certbot
-  #   volumes:
-  #     - ./.build/nginx/ssl:/etc/letsencrypt
-  #     - ./.build/nginx/certbot:/var/www/certbot
-  #   command: certonly --webroot --webroot-path=/var/www/certbot 
-  #           --email marionascimentotj@gmail.com --agree-tos --no-eff-email 
-  #           -d ariska-api.bymario.dev -d ariska-app.bymario.dev
-
   fastapi:
     build:
       context: .
@@ -45,28 +35,6 @@ services:
       - ./src/tmp:/app/src/tmp
     networks:
       - ariskanet
-
-  nginx-api:
-    image: nginx:alpine
-    container_name: ariska-nginx-api
-    restart: unless-stopped
-    ports:
-      - "8999:80"
-      - "8443:443"
-    volumes:
-      - ./.build/nginx/api.conf:/etc/nginx/conf.d/default.conf
-      - ./.build/nginx/ssl:/etc/nginx/ssl
-      - ./.build/nginx/certbot:/var/www/certbot
-    depends_on:
-      # - certbot
-      - fastapi
-    networks:
-      - ariskanet
-    healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1:8999"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
   streamlit:
     build:
@@ -85,28 +53,6 @@ services:
       - fastapi
     networks:
       - ariskanet
-
-  nginx-app:
-    image: nginx:alpine
-    container_name: ariska-nginx-app
-    restart: unless-stopped
-    ports:
-      - "8555:80"
-      - "9443:443"
-    volumes:
-      - ./.build/nginx/app.conf:/etc/nginx/conf.d/default.conf
-      - ./.build/nginx/ssl:/etc/nginx/ssl:rw
-      - ./.build/nginx/certbot:/var/www/certbot:rw
-    depends_on:
-      # - certbot
-      - streamlit
-    networks:
-      - ariskanet
-    healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1:8555"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
 volumes:
   redis-data:
